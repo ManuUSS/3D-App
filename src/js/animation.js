@@ -47,10 +47,10 @@ const gridHelper = new THREE.GridHelper( 25, 25 );
 scene.add( gridHelper );
 
 /* SET UP DE LA ESFERA */
-const sphereGeometry = new THREE.SphereGeometry( 1, 32, 32 );
-const sphereMaterial = new THREE.MeshBasicMaterial( { color: 0x4ed3560 } );
+const sphereGeometry = new THREE.SphereGeometry( 4, 30, 30 );
+const sphereMaterial = new THREE.MeshBasicMaterial( { color: 0x4ed3560, wireframe: true } );
 const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
-sphere.position.set( 0, 2, 0 );
+//sphere.position.set( 0, 2, 0 );
 scene.add( sphere );
 
 /* ANIMACION DEL CUBO */
