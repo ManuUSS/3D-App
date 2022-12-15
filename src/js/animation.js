@@ -35,10 +35,12 @@ scene.add( cube );
 
 /* SET UP DEL PLANO*/
 const planeGeomtry = new THREE.PlaneGeometry( 20, 20 );
-const planeMaterial = new THREE.MeshStandardMaterial( { color: 0xE4E4E4, side: THREE.DoubleSide } );
+const planeMaterial = new THREE.MeshStandardMaterial( { color: 0xFFFFFF, side: THREE.DoubleSide } );
 const plane = new THREE.Mesh( planeGeomtry, planeMaterial );
 /* SE ROTA PARA QUE QUEDA HORIZONTAL */
 plane.rotation.x = Math.PI / 2;
+/* SE RECIBE LA SOMBRA AL PLANO */
+plane.receiveShadow = true;
 /* SE AGREGA EL PLANO A LA ESCENA */
 scene.add( plane );
 
@@ -48,18 +50,20 @@ const gridHelper = new THREE.GridHelper( 20, 20 );
 scene.add( gridHelper );
 
 /* SET UP DE LA ESFERA */
-const sphereGeometry = new THREE.SphereGeometry( 4, 30, 30 );
-const sphereMaterial = new THREE.MeshBasicMaterial( { color: 0x0000FF, wireframe: false } );
+const sphereGeometry = new THREE.SphereGeometry( 2, 15, 15 );
+const sphereMaterial = new THREE.MeshStandardMaterial( { color: 0x0000FF, wireframe: false } );
 const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
-sphere.position.set( -5, 5, 0 );
 scene.add( sphere );
+sphere.position.set( -5, 5, 0 );
+sphere.castShadow = true;
 
 const ambientLight = new THREE.AmbientLight( 0x333333 );
 scene.add( ambientLight );
 
 const directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 1 );
 scene.add( directionalLight );
-directionalLight.position.set( 0, 10, 0 );
+directionalLight.position.set( -20, 10, 0 );
+directionalLight.castShadow = true;
 
 const lightHelper = new THREE.DirectionalLightHelper( directionalLight, 5 );
 scene.add( lightHelper );
