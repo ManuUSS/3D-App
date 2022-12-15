@@ -33,7 +33,7 @@ const cube = new THREE.Mesh( boxGeometry, boxMaterial );
 scene.add( cube );
 
 /* SET UP DEL PLANO*/
-const planeGeomtry = new THREE.PlaneGeometry( 10, 10 );
+const planeGeomtry = new THREE.PlaneGeometry( 20, 20 );
 const planeMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, side: THREE.DoubleSide } );
 const plane = new THREE.Mesh( planeGeomtry, planeMaterial );
 /* SE ROTA PARA QUE QUEDA HORIZONTAL */
@@ -42,9 +42,16 @@ plane.rotation.x = Math.PI / 2;
 scene.add( plane );
 
 /* SET UP DEL GRID */
-const gridHelper = new THREE.GridHelper( 10, 10 );
+const gridHelper = new THREE.GridHelper( 25, 25 );
 /* SE AGREGA EL GRID A LA ESCENA */
 scene.add( gridHelper );
+
+/* SET UP DE LA ESFERA */
+const sphereGeometry = new THREE.SphereGeometry( 1, 32, 32 );
+const sphereMaterial = new THREE.MeshBasicMaterial( { color: 0x4ed3560 } );
+const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
+sphere.position.set( 0, 2, 0 );
+scene.add( sphere );
 
 /* ANIMACION DEL CUBO */
 const animate = () => {
