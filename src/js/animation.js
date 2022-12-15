@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import * as DAT from 'dat.gui';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 /* SE CREA EL RENDER  */
@@ -50,7 +51,7 @@ scene.add( gridHelper );
 const sphereGeometry = new THREE.SphereGeometry( 4, 30, 30 );
 const sphereMaterial = new THREE.MeshBasicMaterial( { color: 0x4ed3560, wireframe: true } );
 const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
-//sphere.position.set( 0, 2, 0 );
+//sphere.position.set( 0, 5, 0 );
 scene.add( sphere );
 
 /* ANIMACION DEL CUBO */
