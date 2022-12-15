@@ -51,7 +51,22 @@ scene.add( gridHelper );
 const sphereGeometry = new THREE.SphereGeometry( 4, 30, 30 );
 const sphereMaterial = new THREE.MeshBasicMaterial( { color: 0x4ed3560, wireframe: true } );
 const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
-//sphere.position.set( 0, 5, 0 );
+sphere.position.set( 0, 5, 0 );
+
+const gui = new DAT.GUI();
+const options = {
+    sphereColor: 0x4ed3560,
+    wireframe: true
+}
+
+gui.addColor( options, 'sphereColor' ).onChange( () => {
+    sphereMaterial.color.set( options.sphereColor );
+});
+
+gui.add(options, 'wireframe').onChange( () => {
+    sphereMaterial.wireframe = options.wireframe;
+});
+
 scene.add( sphere );
 
 /* ANIMACION DEL CUBO */
