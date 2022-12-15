@@ -29,13 +29,13 @@ orbit.update();
 
 /* SETUP DEL CUBO */
 const boxGeometry = new THREE.BoxGeometry( 1, 1, 1 );
-const boxMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+const boxMaterial = new THREE.MeshBasicMaterial( { color: 0x00FF00 } );
 const cube = new THREE.Mesh( boxGeometry, boxMaterial );
 scene.add( cube );
 
 /* SET UP DEL PLANO*/
 const planeGeomtry = new THREE.PlaneGeometry( 20, 20 );
-const planeMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, side: THREE.DoubleSide } );
+const planeMaterial = new THREE.MeshStandardMaterial( { color: 0xE4E4E4, side: THREE.DoubleSide } );
 const plane = new THREE.Mesh( planeGeomtry, planeMaterial );
 /* SE ROTA PARA QUE QUEDA HORIZONTAL */
 plane.rotation.x = Math.PI / 2;
@@ -43,15 +43,22 @@ plane.rotation.x = Math.PI / 2;
 scene.add( plane );
 
 /* SET UP DEL GRID */
-const gridHelper = new THREE.GridHelper( 25, 25 );
+const gridHelper = new THREE.GridHelper( 20, 20 );
 /* SE AGREGA EL GRID A LA ESCENA */
 scene.add( gridHelper );
 
 /* SET UP DE LA ESFERA */
 const sphereGeometry = new THREE.SphereGeometry( 4, 30, 30 );
-const sphereMaterial = new THREE.MeshBasicMaterial( { color: 0x4ed3560, wireframe: true } );
+const sphereMaterial = new THREE.MeshBasicMaterial( { color: 0x0000FF, wireframe: false } );
 const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
-sphere.position.set( 0, 5, 0 );
+sphere.position.set( -5, 5, 0 );
+scene.add( sphere );
+
+const ambientLight = new THREE.AmbientLight( 0x333333 );
+scene.add( ambientLight );
+
+const directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 1 );
+scene.add( directionalLight );
 
 /* CONTROLADOR DEL GUI */
 const gui = new DAT.GUI();
@@ -59,7 +66,7 @@ const gui = new DAT.GUI();
 /* OPCIONES A MOSTRAR */
 const options = {
     sphereColor: 0x4ed3560,
-    wireframe: true,
+    wireframe: false,
     speed: 0.01
 }
 
@@ -85,9 +92,6 @@ const bounce = () => {
     step += options.speed;
     sphere.position.y = 5 + ( Math.abs( Math.sin( step ) ) * 5 );
 }
-
-
-scene.add( sphere );
 
 /* ANIMACION DEL CUBO */
 const animate = () => {
