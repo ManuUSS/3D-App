@@ -59,7 +59,8 @@ const gui = new DAT.GUI();
 /* OPCIONES A MOSTRAR */
 const options = {
     sphereColor: 0x4ed3560,
-    wireframe: true
+    wireframe: true,
+    speed: 0.01
 }
 
 /* SE AGREGAN AL GUI DE OPCIONES  */
@@ -72,11 +73,16 @@ gui.add(options, 'wireframe').onChange( () => {
     sphereMaterial.wireframe = options.wireframe;
 });
 
+/* SE AGREGAN AL GUI DE OPCIONES  */
+gui.add(options, 'speed', 0, 0.2).onChange( () => {
+    speed = options.speed;
+});
+
 let step = 0;
 let speed = 0.01;
 
 const bounce = () => {
-    step += speed;
+    step += options.speed;
     sphere.position.y = 5 + ( Math.abs( Math.sin( step ) ) * 5 );
 }
 
