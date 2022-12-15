@@ -59,6 +59,10 @@ scene.add( ambientLight );
 
 const directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 1 );
 scene.add( directionalLight );
+directionalLight.position.set( 0, 10, 0 );
+
+const lightHelper = new THREE.DirectionalLightHelper( directionalLight, 5 );
+scene.add( lightHelper );
 
 /* CONTROLADOR DEL GUI */
 const gui = new DAT.GUI();
