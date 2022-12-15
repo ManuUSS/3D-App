@@ -53,19 +53,33 @@ const sphereMaterial = new THREE.MeshBasicMaterial( { color: 0x4ed3560, wirefram
 const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
 sphere.position.set( 0, 5, 0 );
 
+/* CONTROLADOR DEL GUI */
 const gui = new DAT.GUI();
+
+/* OPCIONES A MOSTRAR */
 const options = {
     sphereColor: 0x4ed3560,
     wireframe: true
 }
 
+/* SE AGREGAN AL GUI DE OPCIONES  */
 gui.addColor( options, 'sphereColor' ).onChange( () => {
     sphereMaterial.color.set( options.sphereColor );
 });
 
+/* SE AGREGAN AL GUI DE OPCIONES  */
 gui.add(options, 'wireframe').onChange( () => {
     sphereMaterial.wireframe = options.wireframe;
 });
+
+let step = 0;
+let speed = 0.01;
+
+const bounce = () => {
+    step += speed;
+    sphere.position.y = 5 + ( Math.abs( Math.sin( step ) ) * 5 );
+}
+
 
 scene.add( sphere );
 
@@ -74,6 +88,9 @@ const animate = () => {
     cube.rotation.x += 0.01;
     cube.rotation.y += 0.01;
     cube.rotation.z += 0.01;
+
+    bounce();
+
     /* RENDER DE LA ESCENA Y CAMARA */
     renderer.render( scene, camera );
 };
