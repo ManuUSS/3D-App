@@ -32,10 +32,13 @@ const boxMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 const cube = new THREE.Mesh( boxGeometry, boxMaterial );
 scene.add( cube );
 
-const planeGeomtry = new THREE.PlaneGeometry( 20, 20 );
-const planeMaterial = new THREE.MeshBasicMaterial( { color: 0xffff00, side: THREE.DoubleSide } );
+/* SET UP DEL PLANO*/
+const planeGeomtry = new THREE.PlaneGeometry( 10, 10 );
+const planeMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, side: THREE.DoubleSide } );
 const plane = new THREE.Mesh( planeGeomtry, planeMaterial );
+/* SE ROTA PARA QUE QUEDA HORIZONTAL */
 plane.rotation.x = Math.PI / 2;
+/* SE AGREGA AL PLANO */
 scene.add( plane );
 
 /* ANIMACION DEL CUBO */
