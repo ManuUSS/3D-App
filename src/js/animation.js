@@ -38,8 +38,13 @@ const planeMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, side: THRE
 const plane = new THREE.Mesh( planeGeomtry, planeMaterial );
 /* SE ROTA PARA QUE QUEDA HORIZONTAL */
 plane.rotation.x = Math.PI / 2;
-/* SE AGREGA AL PLANO */
+/* SE AGREGA EL PLANO A LA ESCENA */
 scene.add( plane );
+
+/* SET UP DEL GRID */
+const gridHelper = new THREE.GridHelper( 10, 10 );
+/* SE AGREGA EL GRID A LA ESCENA */
+scene.add( gridHelper );
 
 /* ANIMACION DEL CUBO */
 const animate = () => {
