@@ -1,9 +1,8 @@
 import * as THREE from 'three';
 import * as DAT from 'dat.gui';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import basketball from '/assets/basketball.jpg';
-import field from '/assets/soccerfield.jpg';
-import soccerBall from '/assets/soccerball.jpg';
+import tenis from '/assets/tenis.jpg';
+import tenisPitch from '/assets/tenisPitch.jpg';
 
 
 /* SE CREA EL RENDER  */
@@ -44,7 +43,7 @@ scene.add( cube );
 
 /* SET UP DEL PLANO*/
 const planeGeomtry = new THREE.PlaneGeometry( 40, 40 );
-const planeMaterial = new THREE.MeshStandardMaterial( { map: textureLoader.load( field ), side: THREE.DoubleSide } );
+const planeMaterial = new THREE.MeshStandardMaterial( { map: textureLoader.load( tenisPitch ), side: THREE.DoubleSide } );
 const plane = new THREE.Mesh( planeGeomtry, planeMaterial );
 /* SE ROTA PARA QUE QUEDA HORIZONTAL */
 plane.rotation.x = Math.PI / 2;
@@ -60,7 +59,7 @@ scene.add( gridHelper );
 
 /* SET UP DE LA ESFERA */
 const sphereGeometry = new THREE.SphereGeometry( 4, 15, 15 );
-const sphereMaterial = new THREE.MeshStandardMaterial( { map: textureLoader.load( soccerBall ), wireframe: false } );
+const sphereMaterial = new THREE.MeshStandardMaterial( { map: textureLoader.load( tenis ), wireframe: false } );
 const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
 sphere.position.set( -10, 10, 0 );
 sphere.castShadow = true;
