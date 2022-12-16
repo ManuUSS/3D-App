@@ -98,6 +98,8 @@ const options = {
     wireframe: false,
     speed: 0.01,
     angle: 0.2,
+    penumbra: 0,
+    intensity: 1
 }
 
 /* SE AGREGAN AL GUI DE OPCIONES  */
@@ -120,6 +122,10 @@ gui.add(options, 'angle', 0, 1).onChange( () => {
     spotLight.angle = options.angle;
 });
 
+/* SE AGREGAN AL GUI DE OPCIONES  */
+gui.add(options, 'penumbra', 0, 1);
+gui.add(options, 'intensity', 0, 1);
+
 let step = 0;
 
 const bounce = () => {
@@ -135,6 +141,10 @@ const animate = () => {
 
     bounce();
 
+    spotLight.penumbra = options.penumbra;
+    spotLight.intensity = options.intensity;
+    spotLightHelper.update();
+    
     /* RENDER DE LA ESCENA Y CAMARA */
     renderer.render( scene, camera );
 };
