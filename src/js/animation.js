@@ -50,23 +50,30 @@ const gridHelper = new THREE.GridHelper( 20, 20 );
 scene.add( gridHelper );
 
 /* SET UP DE LA ESFERA */
-const sphereGeometry = new THREE.SphereGeometry( 2, 15, 15 );
+const sphereGeometry = new THREE.SphereGeometry( 4, 15, 15 );
 const sphereMaterial = new THREE.MeshStandardMaterial( { color: 0x0000FF, wireframe: false } );
 const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
 scene.add( sphere );
-sphere.position.set( -5, 5, 0 );
+sphere.position.set( 0, 0, 0 );
 sphere.castShadow = true;
 
+/* LUZ DE AMBIENTE */
 const ambientLight = new THREE.AmbientLight( 0x333333 );
 scene.add( ambientLight );
 
-const directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 1 );
+/* LUZ DIRECCIONAL */
+const directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 0.8 );
 scene.add( directionalLight );
-directionalLight.position.set( -20, 10, 0 );
+directionalLight.position.set( 10, 10, 0 );
 directionalLight.castShadow = true;
 
+/* GUIA DE LUZ */
 const lightHelper = new THREE.DirectionalLightHelper( directionalLight, 5 );
 scene.add( lightHelper );
+
+/* GUIA DE SOMBRA */
+const lightShadowHelper = new THREE.CameraHelper( directionalLight.shadow.camera );
+scene.add( lightShadowHelper );
 
 /* CONTROLADOR DEL GUI */
 const gui = new DAT.GUI();
