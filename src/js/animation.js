@@ -80,7 +80,9 @@ scene.add( lightShadowHelper );
 
 /* LUZ PUNTUAL*/
 const spotLight = new THREE.SpotLight( 0xFFFFFF );
-spotLight.position.set( -10, 10, 0 );
+spotLight.position.set( -100, 100, 0 );
+spotLight.castShadow = true;
+spotLight.angle = 0.2;
 scene.add( spotLight );
 /* GUIA DE LUZ PUNTAL*/
 const spotLightHelper = new THREE.SpotLightHelper( spotLight );
