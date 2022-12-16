@@ -6,6 +6,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 const renderer = new THREE.WebGLRenderer();
 /* SE SETEA EL VALOR DEL RENDER  */
 renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.shadowMap.enabled = true;
 
 /* SE AGREGA EL RENDER AL DOCUMENTO  */
 document.body.appendChild( renderer.domElement );
@@ -34,7 +35,7 @@ const cube = new THREE.Mesh( boxGeometry, boxMaterial );
 scene.add( cube );
 
 /* SET UP DEL PLANO*/
-const planeGeomtry = new THREE.PlaneGeometry( 20, 20 );
+const planeGeomtry = new THREE.PlaneGeometry( 30, 30 );
 const planeMaterial = new THREE.MeshStandardMaterial( { color: 0xFFFFFF, side: THREE.DoubleSide } );
 const plane = new THREE.Mesh( planeGeomtry, planeMaterial );
 /* SE ROTA PARA QUE QUEDA HORIZONTAL */
@@ -45,7 +46,7 @@ plane.receiveShadow = true;
 scene.add( plane );
 
 /* SET UP DEL GRID */
-const gridHelper = new THREE.GridHelper( 20, 20 );
+const gridHelper = new THREE.GridHelper( 30, 30 );
 /* SE AGREGA EL GRID A LA ESCENA */
 scene.add( gridHelper );
 
@@ -53,19 +54,21 @@ scene.add( gridHelper );
 const sphereGeometry = new THREE.SphereGeometry( 4, 15, 15 );
 const sphereMaterial = new THREE.MeshStandardMaterial( { color: 0x0000FF, wireframe: false } );
 const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
-scene.add( sphere );
-sphere.position.set( 0, 0, 0 );
+sphere.position.set( -10, 10, 0 );
 sphere.castShadow = true;
+scene.add( sphere );
 
 /* LUZ DE AMBIENTE */
 const ambientLight = new THREE.AmbientLight( 0x333333 );
 scene.add( ambientLight );
 
 /* LUZ DIRECCIONAL */
-const directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 0.8 );
-scene.add( directionalLight );
-directionalLight.position.set( 10, 10, 0 );
+const directionalLight = new THREE.DirectionalLight( 0xFFFFFF, 1 );
+directionalLight.position.set( 10, 1, 0 );
 directionalLight.castShadow = true;
+scene.add( directionalLight );
+/* PROPIEDADES DE LUZ DIRECCIONAL */
+directionalLight.shadow.camera.bottom = -12; 
 
 /* GUIA DE LUZ */
 const lightHelper = new THREE.DirectionalLightHelper( directionalLight, 5 );
@@ -101,7 +104,6 @@ gui.add(options, 'speed', 0, 0.2).onChange( () => {
 });
 
 let step = 0;
-let speed = 0.01;
 
 const bounce = () => {
     step += options.speed;
