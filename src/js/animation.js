@@ -96,7 +96,8 @@ const gui = new DAT.GUI();
 const options = {
     sphereColor: 0x4ed3560,
     wireframe: false,
-    speed: 0.01
+    speed: 0.01,
+    angle: 0.2,
 }
 
 /* SE AGREGAN AL GUI DE OPCIONES  */
@@ -112,6 +113,11 @@ gui.add(options, 'wireframe').onChange( () => {
 /* SE AGREGAN AL GUI DE OPCIONES  */
 gui.add(options, 'speed', 0, 0.2).onChange( () => {
     speed = options.speed;
+});
+
+/* SE AGREGAN AL GUI DE OPCIONES  */
+gui.add(options, 'angle', 0, 1).onChange( () => {
+    spotLight.angle = options.angle;
 });
 
 let step = 0;
