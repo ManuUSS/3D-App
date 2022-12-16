@@ -7,6 +7,7 @@ const renderer = new THREE.WebGLRenderer();
 /* SE SETEA EL VALOR DEL RENDER  */
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.shadowMap.enabled = true;
+renderer.setClearColor( 0x54d5f4, 1 );
 
 /* SE AGREGA EL RENDER AL DOCUMENTO  */
 document.body.appendChild( renderer.domElement );
@@ -88,6 +89,8 @@ scene.add( spotLight );
 const spotLightHelper = new THREE.SpotLightHelper( spotLight );
 scene.add( spotLightHelper );
 
+scene.fog = new THREE.Fog( 0xFFFFFF, 1, 100 );
+
 
 /* CONTROLADOR DEL GUI */
 const gui = new DAT.GUI();
@@ -144,7 +147,7 @@ const animate = () => {
     spotLight.penumbra = options.penumbra;
     spotLight.intensity = options.intensity;
     spotLightHelper.update();
-    
+
     /* RENDER DE LA ESCENA Y CAMARA */
     renderer.render( scene, camera );
 };
