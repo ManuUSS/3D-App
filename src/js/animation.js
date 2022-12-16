@@ -1,6 +1,10 @@
 import * as THREE from 'three';
 import * as DAT from 'dat.gui';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import basketball from '/assets/basketball.jpg';
+import field from '/assets/soccerfield.jpg';
+import soccerBall from '/assets/soccerball.jpg';
+
 
 /* SE CREA EL RENDER  */
 const renderer = new THREE.WebGLRenderer();
@@ -29,6 +33,9 @@ camera.position.set( 0, 2, 10 );
 /* SE ACTUALIZA LA POSICION DE LA CAMARA*/
 orbit.update();
 
+/* INSTANCIA PARA CARGAR TEXTURAS A OBJETOS (IMAGENES) */
+const textureLoader = new THREE.TextureLoader();
+
 /* SETUP DEL CUBO */
 const boxGeometry = new THREE.BoxGeometry( 1, 1, 1 );
 const boxMaterial = new THREE.MeshBasicMaterial( { color: 0x00FF00 } );
@@ -36,8 +43,8 @@ const cube = new THREE.Mesh( boxGeometry, boxMaterial );
 scene.add( cube );
 
 /* SET UP DEL PLANO*/
-const planeGeomtry = new THREE.PlaneGeometry( 30, 30 );
-const planeMaterial = new THREE.MeshStandardMaterial( { color: 0xFFFFFF, side: THREE.DoubleSide } );
+const planeGeomtry = new THREE.PlaneGeometry( 40, 40 );
+const planeMaterial = new THREE.MeshStandardMaterial( { map: textureLoader.load( field ), side: THREE.DoubleSide } );
 const plane = new THREE.Mesh( planeGeomtry, planeMaterial );
 /* SE ROTA PARA QUE QUEDA HORIZONTAL */
 plane.rotation.x = Math.PI / 2;
@@ -53,7 +60,7 @@ scene.add( gridHelper );
 
 /* SET UP DE LA ESFERA */
 const sphereGeometry = new THREE.SphereGeometry( 4, 15, 15 );
-const sphereMaterial = new THREE.MeshStandardMaterial( { color: 0x0000FF, wireframe: false } );
+const sphereMaterial = new THREE.MeshStandardMaterial( { map: textureLoader.load( soccerBall ), wireframe: false } );
 const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
 sphere.position.set( -10, 10, 0 );
 sphere.castShadow = true;
@@ -88,8 +95,8 @@ scene.add( spotLight );
 /* GUIA DE LUZ PUNTAL*/
 const spotLightHelper = new THREE.SpotLightHelper( spotLight );
 scene.add( spotLightHelper );
-
-scene.fog = new THREE.Fog( 0xFFFFFF, 1, 100 );
+/* SE AGREGA NIEBLA CUANDO SE ALEJA MUCHO DE LA ESCENA */
+scene.fog = new THREE.Fog( 0xFFFFFF, 1, 400 );
 
 
 /* CONTROLADOR DEL GUI */
@@ -131,9 +138,16 @@ gui.add(options, 'intensity', 0, 1);
 
 let step = 0;
 
+/* ANIMACION DE REBOTAR */
 const bounce = () => {
     step += options.speed;
     sphere.position.y = 5 + ( Math.abs( Math.sin( step ) ) * 5 );
+}
+
+/* ANIMACION DE LA PELOTA */
+const move = () => {
+    sphere.rotateX( 0.05 );
+    sphere.rotateY( 0.07 );
 }
 
 /* ANIMACION DEL CUBO */
@@ -143,6 +157,7 @@ const animate = () => {
     cube.rotation.z += 0.01;
 
     bounce();
+    move();
 
     spotLight.penumbra = options.penumbra;
     spotLight.intensity = options.intensity;
