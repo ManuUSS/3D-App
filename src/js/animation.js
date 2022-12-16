@@ -78,6 +78,15 @@ scene.add( lightHelper );
 const lightShadowHelper = new THREE.CameraHelper( directionalLight.shadow.camera );
 scene.add( lightShadowHelper );
 
+/* LUZ PUNTUAL*/
+const spotLight = new THREE.SpotLight( 0xFFFFFF );
+spotLight.position.set( -10, 10, 0 );
+scene.add( spotLight );
+/* GUIA DE LUZ PUNTAL*/
+const spotLightHelper = new THREE.SpotLightHelper( spotLight );
+scene.add( spotLightHelper );
+
+
 /* CONTROLADOR DEL GUI */
 const gui = new DAT.GUI();
 
